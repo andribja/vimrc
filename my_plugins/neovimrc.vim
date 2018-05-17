@@ -1,5 +1,7 @@
-" PLUGINS
+" Only run on neovim
+if has('nvim')
 
+" PLUGINS
 call plug#begin('~/.vim/plugged')
 
 " Make sure you use single quotes
@@ -38,11 +40,8 @@ map <silent> <C-n> :NERDTreeToggle<CR>
 "let g:syntastic_python_checkers = ['python']
 
 """
-" Load old vimrc
+" Color
 """
-:source ~/.vimrc
-
-"Color
 :colorscheme desert 
 
 " Syntax highlighting
@@ -55,6 +54,7 @@ set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
 au FileType python setlocal formatprg=autopep8\ -
 
 """ Use miniyank instead of default yank/paste
-map p <Plug>(miniyank-startput)
-map P <Plug>(miniyank-startPut)
+au VimEnter * map p <Plug>(miniyank-startput)
+au VimEnter * map P <Plug>(miniyank-startPut)
 
+endif
