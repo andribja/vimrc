@@ -56,6 +56,7 @@ lightline.vim https://github.com/itchyny/lightline.vim
 vim-abolish https://github.com/tpope/tpope-vim-abolish
 mru.vim https://github.com/vim-scripts/mru.vim
 vim-markdown https://github.com/plasticboy/vim-markdown
+vim-pydocstring https://github.com/heavenshell/vim-pydocstring
 """.strip()
 
 GITHUB_ZIP = '%s/archive/master.zip'
