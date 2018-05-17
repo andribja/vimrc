@@ -15,9 +15,11 @@ from os import path
 
 
 #--- Globals ----------------------------------------------
+# Removed plugins
+# nvim-miniyank preferred
+# vim-yankstack https://github.com/maxbrunsfeld/vim-yankstack
 PLUGINS = """
 ale https://github.com/w0rp/ale
-vim-yankstack https://github.com/maxbrunsfeld/vim-yankstack
 ack.vim https://github.com/mileszs/ack.vim
 bufexplorer https://github.com/corntrace/bufexplorer
 ctrlp.vim https://github.com/ctrlpvim/ctrlp.vim
