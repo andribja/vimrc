@@ -23,6 +23,7 @@ Plug 'hdima/python-syntax'
 
 Plug 'bfredl/nvim-miniyank'
 
+
 " Add plugins to &runtimepath
 call plug#end()
 set rtp+=/usr/local/opt/fzf
@@ -42,13 +43,16 @@ map <silent> <C-n> :NERDTreeToggle<CR>
 """
 " Color
 """
-:colorscheme desert 
+" :colorscheme desert 
 
 " Syntax highlighting
 let python_highlight_all = 1
 
 " tabs are 4 spaces
 set tabstop=8 softtabstop=4 expandtab shiftwidth=4 smarttab
+
+" show relative linenumbers
+set relativenumber
 
 " Automatically apply pep8
 au FileType python setlocal formatprg=autopep8\ -
