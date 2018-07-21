@@ -149,9 +149,13 @@ let g:go_fmt_command = "goimports"
 let g:ale_linters = {
 \   'javascript': ['jshint'],
 \   'python': ['flake8'],
-\   'go': ['go', 'golint', 'errcheck']
+\   'go': ['go', 'golint', 'errcheck'],
+\   'json': ['prettier']
 \}
-let g:ale_fixers = {'python': ['autopep8']}
+let g:ale_fixers = {
+            \'python': ['autopep8'],
+            \'json': ['fixjson']
+            \}
 let g:ale_fix_on_save = 1
 let g:ale_python_autopep8_options = '--aggressive'
 

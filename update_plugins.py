@@ -14,7 +14,7 @@ import requests
 from os import path
 
 
-#--- Globals ----------------------------------------------
+# --- Globals ----------------------------------------------
 # Removed plugins
 # nvim-miniyank preferred
 # vim-yankstack https://github.com/maxbrunsfeld/vim-yankstack
