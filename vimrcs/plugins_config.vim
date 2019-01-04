@@ -28,7 +28,7 @@ map <leader>o :BufExplorer<cr>
 " => MRU plugin
 """"""""""""""""""""""""""""""
 let MRU_Max_Entries = 400
-map <leader>f :MRU<CR>
+map <leader>r :MRU<CR>
 
 
 """"""""""""""""""""""""""""""
@@ -41,17 +41,11 @@ map <leader>f :MRU<CR>
 
 
 """"""""""""""""""""""""""""""
-" => CTRL-P
+" => FZF
 """"""""""""""""""""""""""""""
-let g:ctrlp_working_path_mode = 0
-
-let g:ctrlp_map = '<c-f>'
-map <leader>j :CtrlP<cr>
-map <c-b> :CtrlPBuffer<cr>
-
-let g:ctrlp_max_height = 20
-let g:ctrlp_custom_ignore = 'node_modules\|^\.DS_Store\|^\.git\|^\.coffee'
-
+"
+" " If installed using git
+nnoremap <silent> <C-f> :GFiles<cr>
 
 """"""""""""""""""""""""""""""
 " => ZenCoding
@@ -147,14 +141,17 @@ let g:go_fmt_command = "goimports"
 " => Syntastic (syntax checker)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:ale_linters = {
-\   'javascript': ['jshint'],
+\   'javascript': ['eslint'],
 \   'python': ['flake8'],
 \   'go': ['go', 'golint', 'errcheck'],
-\   'json': ['prettier']
+\   'json': ['prettier'],
+\   'typescript': ['eslint']
 \}
 let g:ale_fixers = {
             \'python': ['autopep8'],
-            \'json': ['fixjson']
+            \'json': ['fixjson'],
+            \'javascript': ['eslint'],
+            \'typescript': ['eslint']
             \}
 let g:ale_fix_on_save = 1
 let g:ale_python_autopep8_options = '--aggressive'
@@ -167,3 +164,9 @@ nmap <silent> <leader>a <Plug>(ale_next_wrap)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:gitgutter_enabled=0
 nnoremap <silent> <leader>d :GitGutterToggle<cr>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => vim-javascript (js linting)
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:javascript_plugin_jsdoc = 1
+

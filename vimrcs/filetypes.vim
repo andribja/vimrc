@@ -25,9 +25,9 @@ au FileType python set indentkeys-=0#
 """"""""""""""""""""""""""""""
 " => JavaScript section
 """""""""""""""""""""""""""""""
-au FileType javascript call JavaScriptFold()
+" au FileType javascript call JavaScriptFold()
 au FileType javascript setl fen
-au FileType javascript setl nocindent
+au FileType javascript setl ts=3 sw=3 expandtab
 
 au FileType javascript imap <c-t> $log();<esc>hi
 au FileType javascript imap <c-a> alert();<esc>hi

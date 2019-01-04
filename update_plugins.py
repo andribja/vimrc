@@ -15,14 +15,12 @@ from os import path
 
 
 # --- Globals ----------------------------------------------
-# Removed plugins
-# nvim-miniyank preferred
-# vim-yankstack https://github.com/maxbrunsfeld/vim-yankstack
 PLUGINS = """
 ale https://github.com/w0rp/ale
 ack.vim https://github.com/mileszs/ack.vim
 bufexplorer https://github.com/corntrace/bufexplorer
-ctrlp.vim https://github.com/ctrlpvim/ctrlp.vim
+fzf https://github.com/junegunn/fzf
+fzf.vim https://github.com/junegunn/fzf.vim
 mayansmoke https://github.com/vim-scripts/mayansmoke
 nerdtree https://github.com/scrooloose/nerdtree
 nginx.vim https://github.com/chr4/nginx.vim
@@ -57,6 +55,8 @@ vim-abolish https://github.com/tpope/tpope-vim-abolish
 mru.vim https://github.com/vim-scripts/mru.vim
 vim-markdown https://github.com/plasticboy/vim-markdown
 vim-pydocstring https://github.com/heavenshell/vim-pydocstring
+typescript-vim https://github.com/leafgarland/typescript-vim
+vim-javascript https://github.com/pangloss/vim-javascript
 """.strip()
 
 GITHUB_ZIP = '%s/archive/master.zip'

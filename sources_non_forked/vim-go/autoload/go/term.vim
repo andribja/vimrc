@@ -1,3 +1,7 @@
+" don't spam the user when Vim is started in Vi compatibility mode
+let s:cpo_save = &cpo
+set cpo&vim
+
 " new creates a new terminal with the given command. Mode is set based on the
 " global variable g:go_term_mode, which is by default set to :vsplit
 function! go#term#new(bang, cmd) abort
@@ -90,7 +94,11 @@ function! s:on_exit(job_id, exit_status, event) dict abort
 
     call win_gotoid(self.winid)
 
-    call go#list#Populate(l:listtype, errors, self.cmd)
+    let title = self.cmd
+    if type(title) == v:t_list
+      let title = join(self.cmd)
+    endif
+    call go#list#Populate(l:listtype, errors, title)
     call go#list#Window(l:listtype, len(errors))
     if !self.bang
       call go#list#JumpToFirst(l:listtype)
@@ -111,5 +119,9 @@ function! s:cleanlist(winid, listtype) abort
   call go#list#Clean(a:listtype)
   call win_gotoid(l:winid)
 endfunction
+
+" restore Vi compatibility settings
+let &cpo = s:cpo_save
+unlet s:cpo_save
 
 " vim: sw=2 ts=2 et
