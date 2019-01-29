@@ -22,7 +22,7 @@ au FileType python set cinkeys-=0#
 au FileType python set indentkeys-=0#
 
 
-""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""
 " => JavaScript section
 """""""""""""""""""""""""""""""
 " au FileType javascript call JavaScriptFold()
@@ -46,6 +46,12 @@ function! JavaScriptFold()
     setl foldtext=FoldText()
 endfunction
 
+
+
+"""""""""""""""""""""""""""""""
+" => TypeScript section
+"""""""""""""""""""""""""""""""
+au FileType typescript setl ts=3 sw=3 expandtab
 
 """"""""""""""""""""""""""""""
 " => CoffeeScript section

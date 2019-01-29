@@ -7,11 +7,15 @@
 " No code folding
 :set nofoldenable
 
+" Easy split pane navigation
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
 map <Leader>p :set paste<CR>o<esc>"*]p:set nopaste<cr>
 set clipboard=unnamedplus
 
-let g:ackprg = 'ag --vimgrep --js --ts --html --ignore=node_modules --ignore=build'
-map <leader>f :Ack<space>""<left>
 
 :augroup numbertoggle
 :  autocmd!
