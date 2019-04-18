@@ -114,14 +114,13 @@ autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Use the the_silver_searcher if possible (much faster than Ack)
 if executable('ag')
-  let g:ackprg = 'ag --vimgrep --smart-case --js --ts --html --ignore=node_modules --ignore=build'
+  let g:ackprg = 'ag --vimgrep --smart-case --js --ts --html --proto --ignore=node_modules --ignore=build'
 endif
 
 " When you press gv you Ack after the selected text
 vnoremap <silent> gv :call VisualSelection('gv', '')<CR>
 
 " Open Ack and put the cursor in the right position
-let g:ackprg = 'ag --vimgrep --js --ts --html --ignore=node_modules --ignore=build'
 map <leader>f :Ack<space>""<left>
 
 " When you press <leader>r you can search and replace the selected text

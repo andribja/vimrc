@@ -1,6 +1,3 @@
-" Mouse support
-:set mouse=a
-
 " Number / relative number
 :set number relativenumber
 
@@ -14,7 +11,7 @@ nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
 map <Leader>p :set paste<CR>o<esc>"*]p:set nopaste<cr>
-set clipboard=unnamedplus
+" set clipboard=unnamedplus
 
 
 :augroup numbertoggle
