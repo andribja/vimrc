@@ -57,6 +57,7 @@ vim-markdown https://github.com/plasticboy/vim-markdown
 vim-pydocstring https://github.com/heavenshell/vim-pydocstring
 typescript-vim https://github.com/leafgarland/typescript-vim
 vim-javascript https://github.com/pangloss/vim-javascript
+tsuquyomi https://github.com/Quramy/tsuquyomi
 """.strip()
 
 GITHUB_ZIP = '%s/archive/master.zip'

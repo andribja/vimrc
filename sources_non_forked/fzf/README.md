@@ -37,6 +37,7 @@ Table of Contents
       * [Search syntax](#search-syntax)
       * [Environment variables](#environment-variables)
       * [Options](#options)
+      * [Demo](#demo)
    * [Examples](#examples)
    * [fzf-tmux script](#fzf-tmux-script)
    * [Key bindings for command line](#key-bindings-for-command-line)
@@ -87,6 +88,10 @@ brew install fzf
 # To install useful key bindings and fuzzy completion:
 $(brew --prefix)/opt/fzf/install
 ```
+
+fzf is also available [via MacPorts][portfile]: `sudo port install fzf`
+
+[portfile]: https://github.com/macports/macports-ports/blob/master/sysutils/fzf/Portfile
 
 ### Using git
 
@@ -278,6 +283,13 @@ or `py`.
 #### Options
 
 See the man page (`man fzf`) for the full list of options.
+
+#### Demo
+If you learn by watching videos, check out this screencast by [@samoshkin](https://github.com/samoshkin) to explore `fzf` features.
+
+<a title="fzf - command-line fuzzy finder" href="https://www.youtube.com/watch?v=qgG5Jhi_Els">
+  <img src="https://i.imgur.com/vtG8olE.png" width="640">
+</a>
 
 Examples
 --------
@@ -494,15 +506,17 @@ fzf --preview 'head -100 {}'
 Preview window supports ANSI colors, so you can use programs that
 syntax-highlights the content of a file.
 
+- Bat: https://github.com/sharkdp/bat
 - Highlight: http://www.andre-simon.de/doku/highlight/en/highlight.php
 - CodeRay: http://coderay.rubychan.de/
 - Rouge: https://github.com/jneen/rouge
 
 ```bash
-# Try highlight, coderay, rougify in turn, then fall back to cat
+# Try bat, highlight, coderay, rougify in turn, then fall back to cat
 fzf --preview '[[ $(file --mime {}) =~ binary ]] &&
                  echo {} is a binary file ||
-                 (highlight -O ansi -l {} ||
+                 (bat --style=numbers --color=always {} ||
+                  highlight -O ansi -l {} ||
                   coderay {} ||
                   rougify {} ||
                   cat {}) 2> /dev/null | head -500'

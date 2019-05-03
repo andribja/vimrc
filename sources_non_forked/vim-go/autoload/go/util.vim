@@ -196,6 +196,22 @@ function! go#util#Exec(cmd, ...) abort
   return call('s:exec', [[l:bin] + a:cmd[1:]] + a:000)
 endfunction
 
+function! go#util#ExecInDir(cmd, ...) abort
+  if !isdirectory(expand("%:p:h"))
+    return ['', 1]
+  endif
+
+  let cd = exists('*haslocaldir') && haslocaldir() ? 'lcd ' : 'cd '
+  let dir = getcwd()
+  try
+    execute cd . fnameescape(expand("%:p:h"))
+    let [l:out, l:err] = call('go#util#Exec', [a:cmd] + a:000)
+  finally
+    execute cd . fnameescape(l:dir)
+  endtry
+  return [l:out, l:err]
+endfunction
+
 function! s:exec(cmd, ...) abort
   let l:bin = a:cmd[0]
   let l:cmd = go#util#Shelljoin([l:bin] + a:cmd[1:])
@@ -439,6 +455,99 @@ endfunction
 " Report if the user enabled a debug flag in g:go_debug.
 function! go#util#HasDebug(flag)
   return index(go#config#Debug(), a:flag) >= 0
+endfunction
+
+function! go#util#OpenBrowser(url) abort
+    let l:cmd = go#config#PlayBrowserCommand()
+    if len(l:cmd) == 0
+        redraw
+        echohl WarningMsg
+        echo "It seems that you don't have general web browser. Open URL below."
+        echohl None
+        echo a:url
+        return
+    endif
+
+    " if setting starts with a !.
+    if l:cmd =~ '^!'
+        let l:cmd = substitute(l:cmd, '%URL%', '\=escape(shellescape(a:url), "#")', 'g')
+        silent! exec l:cmd
+    elseif cmd =~ '^:[A-Z]'
+        let l:cmd = substitute(l:cmd, '%URL%', '\=escape(a:url,"#")', 'g')
+        exec l:cmd
+    else
+        let l:cmd = substitute(l:cmd, '%URL%', '\=shellescape(a:url)', 'g')
+        call go#util#System(l:cmd)
+    endif
+endfunction
+
+function! go#util#ParseErrors(lines) abort
+  let errors = []
+
+  for line in a:lines
+    let fatalerrors = matchlist(line, '^\(fatal error:.*\)$')
+    let tokens = matchlist(line, '^\s*\(.\{-}\):\(\d\+\):\s*\(.*\)')
+
+    if !empty(fatalerrors)
+      call add(errors, {"text": fatalerrors[1]})
+    elseif !empty(tokens)
+      " strip endlines of form ^M
+      let out = substitute(tokens[3], '\r$', '', '')
+
+      call add(errors, {
+            \ "filename" : fnamemodify(tokens[1], ':p'),
+            \ "lnum"     : tokens[2],
+            \ "text"     : out,
+            \ })
+    elseif !empty(errors)
+      " Preserve indented lines.
+      " This comes up especially with multi-line test output.
+      if match(line, '^\s') >= 0
+        call add(errors, {"text": substitute(line, '\r$', '', '')})
+      endif
+    endif
+  endfor
+
+  return errors
+endfunction
+
+function! go#util#ShowInfo(info)
+  if empty(a:info)
+    return
+  endif
+
+  echo "vim-go: " | echohl Function | echon a:info | echohl None
+endfunction
+
+" go#util#SetEnv takes the name of an environment variable and what its value
+" should be and returns a function that will restore it to its original value.
+function! go#util#SetEnv(name, value) abort
+  let l:state = {}
+
+  if len(a:name) == 0
+    return function('s:noop', [], l:state)
+  endif
+
+  let l:remove = 0
+  if exists('$' . a:name)
+    let l:oldvalue = eval('$' . a:name)
+  else
+    let l:remove = 1
+  endif
+
+  call execute('let $' . a:name . ' = "' . a:value . '"')
+
+  if l:remove
+    function! s:remove(name) abort
+      call execute('unlet $' . a:name)
+    endfunction
+    return function('s:remove', [a:name], l:state)
+  endif
+
+  return function('go#util#SetEnv', [a:name, l:oldvalue], l:state)
+endfunction
+
+function! s:noop(...) abort dict
 endfunction
 
 " restore Vi compatibility settings
