@@ -45,7 +45,7 @@ map <leader>r :MRU<CR>
 """"""""""""""""""""""""""""""
 "
 " " If installed using git
-nnoremap <silent> <C-f> :GFiles<cr>
+nnoremap <silent> <C-f> :Files<cr>
 
 """"""""""""""""""""""""""""""
 " => ZenCoding
@@ -139,6 +139,7 @@ let g:go_fmt_command = "goimports"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => ALE (syntax checker)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:ale_enabled = 0
 let g:ale_linters = {
 \   'javascript': ['eslint'],
 \   'python': ['flake8'],
@@ -157,16 +158,12 @@ let g:ale_python_autopep8_options = '--aggressive'
 
 nmap <silent> <leader>a <Plug>(ale_next_wrap)
 
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => CoC code completion
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Git gutter (Git diff)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:gitgutter_enabled=0
-nnoremap <silent> <leader>d :GitGutterToggle<cr>
+" conflicts with build deps mapping
+" nnoremap <silent> <leader>d :GitGutterToggle<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => vim-javascript (js linting)
